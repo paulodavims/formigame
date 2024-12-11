@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuoybya2f4fbp"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_h73y5"]
+[ext_resource type="Texture2D" uid="uid://b4wy14by6s2t2" path="res://formiga.png" id="2_3guq2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r7w0w"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3guq2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wk2g"]
+radius = 11.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_h73y5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(183, -105)
+scale = Vector2(0.7, 0.668)
+sprite_frames = SubResource("SpriteFrames_r7w0w")
+animation = &"Idle"
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3wk2g")
+
+[node name="Camera2D" type="Camera2D" parent="."]

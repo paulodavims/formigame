@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://pu7dqi735pq2"]
+
+[ext_resource type="Texture2D" uid="uid://tax07tc53rnq" path="res://Inimigos/ant-sheet.png" id="1_rf542"]
+[ext_resource type="Script" path="res://Inimigos/inimigo_formiga.gd" id="1_sb4nf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goswh"]
+size = Vector2(15, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e45fr"]
+atlas = ExtResource("1_rf542")
+region = Rect2(0, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxc86"]
+atlas = ExtResource("1_rf542")
+region = Rect2(37, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o53la"]
+atlas = ExtResource("1_rf542")
+region = Rect2(74, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abjki"]
+atlas = ExtResource("1_rf542")
+region = Rect2(111, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iijmj"]
+atlas = ExtResource("1_rf542")
+region = Rect2(148, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01477"]
+atlas = ExtResource("1_rf542")
+region = Rect2(185, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2afgd"]
+atlas = ExtResource("1_rf542")
+region = Rect2(222, 0, 37, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3sfn"]
+atlas = ExtResource("1_rf542")
+region = Rect2(259, 0, 37, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vwv4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e45fr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxc86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o53la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abjki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iijmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2afgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3sfn")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mmjr"]
+size = Vector2(31, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x3hr"]
+size = Vector2(31, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5f41b"]
+radius = 182.0
+
+[node name="Inimigo formiga" type="CharacterBody2D"]
+script = ExtResource("1_sb4nf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 9)
+shape = SubResource("RectangleShape2D_goswh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vwv4e")
+animation = &"Run"
+frame = 2
+frame_progress = 0.0558912
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Morrer" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5, 0.5)
+shape = SubResource("RectangleShape2D_1mmjr")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="matar" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(2.5, 10.5)
+shape = SubResource("RectangleShape2D_7x3hr")
+
+[node name="perseguirplayer" type="Area2D" parent="."]
+
+[node name="perseguir" type="CollisionShape2D" parent="perseguirplayer"]
+position = Vector2(-7, 8)
+shape = SubResource("CircleShape2D_5f41b")
+
+[connection signal="body_entered" from="perseguirplayer" to="." method="_on_perseguirplayer_body_entered"]
+[connection signal="body_exited" from="perseguirplayer" to="." method="_on_perseguirplayer_body_exited"]
